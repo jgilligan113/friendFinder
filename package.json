@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/jgilligan113/friendFinder#readme",
   "dependencies": {
+    "array-math": "^1.1.3",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "math-absolute-difference": "^1.0.0",
     "path": "^0.12.7"
   }
 }

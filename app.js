@@ -3,7 +3,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var fs = require('fs')
+var fs = require('fs');
+var aMath = require('array-math');
+var diff = require('math-absolute-difference');
 var friends = require('./friends.js');
 //set up Express App
 // =============================================================
@@ -41,15 +43,25 @@ app.post("/add", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
   var newFriend = req.body;
   console.log(newFriend);
-  console.log(newFriend.answers[3]);
-  for (var i = 0; i< friends.friends.length; i++) {
+  console.log(newFriend.answers);
+  
+  for (var i = 0; i< 1; i++) {
+    var answerdiff = [];
+    //differences.push(answerdiff);
+    for (var int = 0; int < newFriend.answers.length; int++) {
     
-    console.log(friends.friends[i].answers[3]);
+    console.log(newFriend.answers[int]);
+    console.log(friends.friends[i].answers[int])
+    answerdiff.push(diff(parseInt(newFriend.answers[int]),parseInt(friends.friends[i].answers[int])));
+    console.log(answerdiff);
+    console.log("this is the difference in the answers: " , aMath.sum(answerdiff));
+    }
+    //console.log(friends.friends[i].answers[]);
   }
   // We then add the json the user sent to the character array
   friends.friends.push(newFriend);
   // We then display the JSON to the users
-  console.log(friends.friends);
+  //console.log(friends.friends);
   res.json(newFriend);
   
   
