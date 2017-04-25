@@ -41,11 +41,19 @@ app.post("/add", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
   var newFriend = req.body;
   console.log(newFriend);
+  console.log(newFriend.answers[3]);
+  for (var i = 0; i< friends.friends.length; i++) {
+    
+    console.log(friends.friends[i].answers[3]);
+  }
   // We then add the json the user sent to the character array
   friends.friends.push(newFriend);
   // We then display the JSON to the users
   console.log(friends.friends);
   res.json(newFriend);
+  
+  
+  //res.json(matchFriend);
 });
 
 
