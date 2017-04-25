@@ -3,7 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var fs = require ('fs')
+var fs = require('fs')
 var friends = require('./friends.js');
 //set up Express App
 // =============================================================
@@ -24,25 +24,25 @@ app.use(express.static(path.join(__dirname)));
 //set up routes
 // =============================================================
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/survey", function(req, res) {
+app.get("/survey", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
   res.sendFile(path.join(__dirname, "survey.html"));
 });
-app.get("/api/friends", function(req, res) {
+app.get("/api/friends", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
-  res.sendFile(path.join(__dirname, "view.html"));
+  return res.json(friends.friends);;
 });
-app.post("/add", function(req, res) {
+app.post("/add", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
   var newFriend = req.body;
   console.log(newFriend);
   // We then add the json the user sent to the character array
-  characters.push(newFriend);
+  friends.friends.push(newFriend);
   // We then display the JSON to the users
   console.log(friends.friends);
   res.json(newFriend);
@@ -53,7 +53,7 @@ app.post("/add", function(req, res) {
 
 // Starts the server to begin listening
 // =============================================================
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
-  console.log(friends);
+  console.log(friends.friends[0]);
 });
