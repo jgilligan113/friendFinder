@@ -7,6 +7,7 @@ var fs = require('fs');
 var aMath = require('array-math');
 var diff = require('math-absolute-difference');
 var math = require('mathjs');
+var sortBy = require('sort-by');
 var friends = require('./friends.js');
 //set up Express App
 // =============================================================
@@ -46,27 +47,35 @@ app.post("/add", function (req, res) {
   console.log(newFriend);
   console.log(newFriend.answers);
   
-  for (var i = 0; i< friends.friends.length; i++) {
+
+  for (var i = 0; i < friends.friends.length; i++) {
     var answerdiff = [];
-    
+
     for (var int = 0; int < newFriend.answers.length; int++) {
-    
-    console.log(newFriend.answers[int]);
-    console.log(friends.friends[i].answers[int])
-    answerdiff.push(diff(parseInt(newFriend.answers[int]),parseInt(friends.friends[i].answers[int])));
-    console.log(answerdiff);
-    console.log("this is the difference in the answers: " , aMath.sum(answerdiff));
+
+      console.log(newFriend.answers[int]);
+      console.log(friends.friends[i].answers[int]);
+      answerdiff.push(diff(parseInt(newFriend.answers[int]), parseInt(friends.friends[i].answers[int])));
+      console.log(answerdiff);
+      console.log("this is the difference in the answers: ", aMath.sum(answerdiff));
+    }
+    friends.friends[i].difference = aMath.sum(answerdiff);
   }
-   friends.friends[i].difference = aMath.sum(answerdiff)
-    //console.log(friends.friends[i].answers[]);
-  }
+  // var minDiff = getMin(friends.friends, "difference");
+  //   console.log(minDiff.name + " - " + minDiff.difference);
   // console.log("This is the array of differences" , differences);
   // We then add the json the user sent to the character array
   friends.friends.push(newFriend);
+  // var minimum = getMin(friends.friends, 'difference')
+  // console.log(minimum);
   // We then display the JSON to the users
-  console.log(friends.friends);
-  res.json(newFriend);
   
+  var matchArr = friends.friends.sort(sortBy('difference'));
+  console.log(matchArr)
+  console.log(matchArr[1]);
+  res.json(newFriend, matchArr[1]);
+  
+
   //res.json(matchFriend);
 });
 
@@ -74,5 +83,7 @@ app.post("/add", function (req, res) {
 // =============================================================
 app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
-  console.log(friends.friends[0]);
+  //console.log(friends.friends[0]);
 });
+
+

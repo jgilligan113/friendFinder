@@ -21,6 +21,8 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "math-absolute-difference": "^1.0.0",
-    "path": "^0.12.7"
+    "mathjs": "^3.12.1",
+    "path": "^0.12.7",
+    "sort-by": "^1.2.0"
   }
 }
