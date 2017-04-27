@@ -179,7 +179,7 @@
 				</div>
 				<div class="modal-body">
 					<h2 id="matchName"></h2>
-					<img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+					<img id="matchImg" src="#" alt="">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -246,20 +246,21 @@
 				console.log(currentURL);
 				// AJAX post the data to the friends API. 
 				$.post(currentURL + "/add", newFriend, function (data) {
-
+					console.log(data[1]);
 					// Grab the result from the AJAX post so that the best match's name and photo are displayed.
-					$("#matchName").text(data.name);
-					$('#matchImg').attr("src", data.photo);
-
+					$("#matchName").text(data[1].name);
+					$('#matchImg').attr("src", data[1].photo);
+					
 					// Show the modal with the best match 
 					$("#resultsModal").modal('toggle');
 
-				}, "application/json");
+				});
+				
 			} else {
 				alert("Please fill out all fields before submitting!");
 			}
-			console.log(newFriend);
-			console.log(res);
+			//console.log(newFriend);
+			
 
 			return false;
 		});

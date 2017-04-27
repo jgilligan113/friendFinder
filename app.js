@@ -44,8 +44,8 @@ app.get("/api/friends", function (req, res) {
 app.post("/add", function (req, res) {
   // res.send("Welcome to the Star Wars Page!")
   var newFriend = req.body;
-  console.log(newFriend);
-  console.log(newFriend.answers);
+  //console.log(newFriend);
+  //console.log(newFriend.answers);
   
 
   for (var i = 0; i < friends.friends.length; i++) {
@@ -61,19 +61,18 @@ app.post("/add", function (req, res) {
     }
     friends.friends[i].difference = aMath.sum(answerdiff);
   }
-  // var minDiff = getMin(friends.friends, "difference");
-  //   console.log(minDiff.name + " - " + minDiff.difference);
-  // console.log("This is the array of differences" , differences);
+  
   // We then add the json the user sent to the character array
   friends.friends.push(newFriend);
-  // var minimum = getMin(friends.friends, 'difference')
-  // console.log(minimum);
-  // We then display the JSON to the users
-  
-  var matchArr = friends.friends.sort(sortBy('difference'));
-  console.log(matchArr)
-  console.log(matchArr[1]);
-  res.json(newFriend, matchArr[1]);
+ 
+  // We then display the JSON to the users 
+  res.json(friends.friends.sort(sortBy('difference')));
+  console.log(friends.friends.sort(sortBy('difference')));
+  //console.log(matchArr)
+  //console.log(matchArr[1]);
+  //res.json(newFriend);
+  // We then display the JSON to the users 
+  //matchArr);
   
 
   //res.json(matchFriend);
